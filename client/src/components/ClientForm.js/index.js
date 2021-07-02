@@ -1,11 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { Form, Col, Row } from 'react-bootstrap';
+import { Form, Col, Row, Button } from 'react-bootstrap';
 import Products from '../../data/products.json'
+import api from '../../utils/api'
 
 function ClientForm() {
+    const [firstName, setFirstName ] = useState('')
+    const [ lastName, setLastName ] = useState('')
+    const [ cellPhone, setCellPhone ] = useState('')
+    const [ homePhone, setHomePhone ] = useState('')
+    const [ email, setEmail ] = useState('')
+    const [ line1, setLine1 ] = useState('')
+    const [ line2, setLine2 ] = useState('')
+    const [ city, setCity ] = useState('')
+    const [ state, setState ] = useState('')
+    const [ zip, setZip ] = useState('')
+    // const [ customerID, setCustomerID ] = useState('')
+    const customerID = 7832
+
+
+    function onSubmit(e) {
+        e.preventDefault();
+        api.saveCustomer(customerID, firstName, lastName, cellPhone, homePhone, email, line1, line2, city, state, zip)
+    }
 
 const products = Products["Product Group"]
-
+// setCustomerID(7324)
     return(
         <Form>
 <Form.Group>
@@ -14,7 +33,9 @@ const products = Products["Product Group"]
       First Name
     </Form.Label>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="First Name" />
+      <Form.Control size="lg" type="text" placeholder="First Name"
+      onChange={(e) => setFirstName(e.target.value)} value={firstName}
+       />
     </Col>
   </Form.Row>
 
@@ -25,7 +46,9 @@ const products = Products["Product Group"]
       Last Name
     </Form.Label>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="Last Name" />
+      <Form.Control size="lg" type="text" placeholder="Last Name" 
+      onChange={(e) => setLastName(e.target.value)} value={lastName}
+       />
     </Col>
   </Form.Row>
   
@@ -36,7 +59,9 @@ const products = Products["Product Group"]
       Cell Phone
     </Form.Label>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="Cell Number" />
+      <Form.Control size="lg" type="text" placeholder="Cell Number" 
+      onChange={(e) => setCellPhone(e.target.value)} value={cellPhone}
+      />
     </Col>
   </Form.Row>
 
@@ -47,7 +72,9 @@ const products = Products["Product Group"]
       Home Phone
     </Form.Label>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="Home Number" />
+      <Form.Control size="lg" type="text" placeholder="Home Number"
+      onChange={(e) => setHomePhone(e.target.value)} value={homePhone}
+       />
     </Col>
   </Form.Row>
 
@@ -58,7 +85,8 @@ const products = Products["Product Group"]
       Email
     </Form.Label>
     <Col>
-      <Form.Control size="lg" type="email" placeholder="Email" />
+      <Form.Control size="lg" type="email" placeholder="Email"
+      onChange={(e) => setEmail(e.target.value)} value={email} />
     </Col>
   </Form.Row>
 
@@ -69,7 +97,9 @@ const products = Products["Product Group"]
       Address Line 1
     </Form.Label>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="Address 1" />
+      <Form.Control size="lg" type="text" placeholder="Address 1" 
+      onChange={(e) => setLine1(e.target.value)} value={line1}
+      />
     </Col>
   </Form.Row>
 
@@ -80,7 +110,9 @@ const products = Products["Product Group"]
       Address Line 2
     </Form.Label>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="Address 2" />
+      <Form.Control size="lg" type="text" placeholder="Address 2" 
+      onChange={(e) => setLine2(e.target.value)} value={line2}
+      />
     </Col>
   </Form.Row>
 
@@ -91,13 +123,16 @@ const products = Products["Product Group"]
       City, State, Zip
     </Form.Label>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="City" />
+      <Form.Control size="lg" type="text" placeholder="City"
+      onChange={(e) => setCity(e.target.value)} value={city} />
     </Col>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="State" />
+      <Form.Control size="lg" type="text" placeholder="State" 
+      onChange={(e) => setState(e.target.value)} value={state}/>
     </Col>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="Zip" />
+      <Form.Control size="lg" type="text" placeholder="Zip"
+      onChange={(e) => setZip(e.target.value)} value={zip} />
     </Col>
 
   </Form.Row>
@@ -172,7 +207,7 @@ const products = Products["Product Group"]
   </Form.Row>
 </Form.Group>
 
-
+<Button type="submit" variant="warning" block onClick={onSubmit}>Save Customer</Button>{' '}
 
 </Form>
 
