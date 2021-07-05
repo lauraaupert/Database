@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Form, Col, Row, Button } from 'react-bootstrap';
-import Products from '../../data/products.json'
 import api from '../../utils/api'
 
 function ClientForm() {
-    const [firstName, setFirstName ] = useState('')
+    const [ firstName, setFirstName ] = useState('')
     const [ lastName, setLastName ] = useState('')
     const [ cellPhone, setCellPhone ] = useState('')
     const [ homePhone, setHomePhone ] = useState('')
@@ -14,6 +13,7 @@ function ClientForm() {
     const [ city, setCity ] = useState('')
     const [ state, setState ] = useState('')
     const [ zip, setZip ] = useState('')
+    const [ products, setProducts ] = useState([])
     // const [ customerID, setCustomerID ] = useState('')
     const customerID = 7832
 
@@ -21,19 +21,30 @@ function ClientForm() {
     function onSubmit(e) {
         e.preventDefault();
         api.saveCustomer(customerID, firstName, lastName, cellPhone, homePhone, email, line1, line2, city, state, zip)
-    }
+      }
 
-const products = Products["Product Group"]
+    useEffect(() => {
+      console.log()
+      api.getProducts()
+      .then(res => {
+        console.log(res.data)
+        setProducts(res.data);
+      })
+      .catch(error => {
+        console.log('Error getting fake data: ' + error);
+        })
+    
+    }, []);   
 // setCustomerID(7324)
     return(
         <Form>
 <Form.Group>
   <Form.Row>
-    <Form.Label column="lg" lg={2}>
+    <Form.Label column="md" md={2}>
       First Name
     </Form.Label>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="First Name"
+      <Form.Control size="md" type="text" placeholder="First Name"
       onChange={(e) => setFirstName(e.target.value)} value={firstName}
        />
     </Col>
@@ -42,11 +53,11 @@ const products = Products["Product Group"]
   <hr />
 
   <Form.Row>
-    <Form.Label column="lg" lg={2}>
+    <Form.Label column="md" md={2}>
       Last Name
     </Form.Label>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="Last Name" 
+      <Form.Control size="md" type="text" placeholder="Last Name" 
       onChange={(e) => setLastName(e.target.value)} value={lastName}
        />
     </Col>
@@ -55,11 +66,11 @@ const products = Products["Product Group"]
   <hr />
 
   <Form.Row>
-    <Form.Label column="lg" lg={2}>
+    <Form.Label column="md" md={2}>
       Cell Phone
     </Form.Label>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="Cell Number" 
+      <Form.Control size="md" type="text" placeholder="Cell Number" 
       onChange={(e) => setCellPhone(e.target.value)} value={cellPhone}
       />
     </Col>
@@ -68,11 +79,11 @@ const products = Products["Product Group"]
   <hr />
 
   <Form.Row>
-    <Form.Label column="lg" lg={2}>
+    <Form.Label column="md" md={2}>
       Home Phone
     </Form.Label>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="Home Number"
+      <Form.Control size="md" type="text" placeholder="Home Number"
       onChange={(e) => setHomePhone(e.target.value)} value={homePhone}
        />
     </Col>
@@ -81,11 +92,11 @@ const products = Products["Product Group"]
   <hr />
 
   <Form.Row>
-    <Form.Label column="lg" lg={2}>
+    <Form.Label column="md" md={2}>
       Email
     </Form.Label>
     <Col>
-      <Form.Control size="lg" type="email" placeholder="Email"
+      <Form.Control size="md" type="email" placeholder="Email"
       onChange={(e) => setEmail(e.target.value)} value={email} />
     </Col>
   </Form.Row>
@@ -93,11 +104,11 @@ const products = Products["Product Group"]
   <hr />
 
   <Form.Row>
-    <Form.Label column="lg" lg={2}>
+    <Form.Label column="md" md={2}>
       Address Line 1
     </Form.Label>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="Address 1" 
+      <Form.Control size="md" type="text" placeholder="Address 1" 
       onChange={(e) => setLine1(e.target.value)} value={line1}
       />
     </Col>
@@ -106,11 +117,11 @@ const products = Products["Product Group"]
   <hr />
 
   <Form.Row>
-    <Form.Label column="lg" lg={2}>
+    <Form.Label column="md" md={2}>
       Address Line 2
     </Form.Label>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="Address 2" 
+      <Form.Control size="md" type="text" placeholder="Address 2" 
       onChange={(e) => setLine2(e.target.value)} value={line2}
       />
     </Col>
@@ -119,19 +130,19 @@ const products = Products["Product Group"]
   <hr />
 
   <Form.Row>
-    <Form.Label column="lg" lg={2}>
+    <Form.Label column="md" md={2}>
       City, State, Zip
     </Form.Label>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="City"
+      <Form.Control size="md" type="text" placeholder="City"
       onChange={(e) => setCity(e.target.value)} value={city} />
     </Col>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="State" 
+      <Form.Control size="md" type="text" placeholder="State" 
       onChange={(e) => setState(e.target.value)} value={state}/>
     </Col>
     <Col>
-      <Form.Control size="lg" type="text" placeholder="Zip"
+      <Form.Control size="md" type="text" placeholder="Zip"
       onChange={(e) => setZip(e.target.value)} value={zip} />
     </Col>
 
@@ -178,7 +189,7 @@ const products = Products["Product Group"]
     {products.map(item => {
         return (
 
-            <option>{item.Carpet.name}</option>
+            <option>{item.name}</option>
               )
     })}
                   </Form.Control>
@@ -188,23 +199,6 @@ const products = Products["Product Group"]
 
   </Form.Row>
 
-  <Form.Row>
-    <Form.Label column="lg" lg={2}>
-      Large Text
-    </Form.Label>
-    <Col>
-      <Form.Control size="lg" type="text" placeholder="Large text" />
-    </Col>
-  </Form.Row>
-
-  <Form.Row>
-    <Form.Label column="lg" lg={2}>
-      Large Text
-    </Form.Label>
-    <Col>
-      <Form.Control size="lg" type="text" placeholder="Large text" />
-    </Col>
-  </Form.Row>
 </Form.Group>
 
 <Button type="submit" variant="warning" block onClick={onSubmit}>Save Customer</Button>{' '}
