@@ -67,6 +67,33 @@ saveJob: function (jobID, customerID, date, jobType, quantity, total) {
      latitude: latitude,
      longitude: longitude })
   },
+  // updateCustomer: function (id, lastName, county) {
+  //   return axios.put("/api/customers/" + id, 
+  //    { _id: id },
+  //    {$push: {county: county} }
+  //   )},
+    updateCustomer: function (id, customerID, firstName, lastName, cellPhone, homePhone,
+       email, county, 
+       line1, line2, city, state, zip) {
+      return axios.put("/api/customers", 
+       { _id: id, 
+        customerID: customerID, 
+        firstName: firstName, 
+        lastName: lastName, 
+        cellPhone: cellPhone,
+        homePhone: homePhone,
+
+        email: email,
+        county: county,
+        address: {
+            line1: line1,
+            line2: line2,
+            city: city,
+            state: state,
+            zip: zip
+          }
+        } 
+      )},
   getCustomer: function (search) {
     return axios.get('/api/customers', search);
   },
