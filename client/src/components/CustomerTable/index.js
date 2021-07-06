@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table'
 import api from  '../../utils/api'
 import { Form, Col, Row, Button } from 'react-bootstrap';
+import ClientForm from '../ClientForm.js';
 
 function CustomerTable() {
     const [allData,setAllData] = useState([]);
@@ -55,53 +56,6 @@ emailResult = allData.filter((data) => {
 result = emailResult;
 
 }
-//  } 
-//  else  {           
-//         let cityResult =[];
-//         cityResult = allData.filter((data) => {
-//           return data.address.city.search(value) !== -1;
-//         });
-//         if (cityResult.length >=1) {
-//         result = cityResult;
-//     }
-//  } 
-//  else {           
-//         let zipResult =[];
-//         zipResult = allData.filter((data) => {
-//           return data.zip.search(value) !== -1;
-//         });
-//         if (zipResult.length >1) {
-//         result = zipResult;
-//     } else {          
-//         let lastNameResult =[];
-//         lastNameResult = allData.filter((data) => {
-//           return data.lastName.search(value) !== -1;
-//         });
-//         if (lastNameResult.length >1) {
-//         result = lastNameResult;
-//     } else {           
-//         let emailResult =[];
-//         emailResult = allData.filter((data) => {
-//           return data.email.search(value) !== -1;
-//         });
-//         if (emailResult.length >1) {
-//         result = emailResult;
-//     } else {           
-//         let cellPhoneResult =[];
-//         cellPhoneResult = allData.filter((data) => {
-//           return data.cellPhone.search(value) !== -1;
-//         });
-//         if (cellPhoneResult.length >1) {
-//         result = cellPhoneResult;
-//     } else {           
-//         let customerIDResult =[];
-//         customerIDResult = allData.filter((data) => {
-//           return data.customerID.search(value) !== -1;
-//         });
-//         if (customerIDResult.length >1) {
-//         result = customerIDResult;
-    // } 
-    // }
         console.log(result)
         // }
         setFilteredData(result);
@@ -158,6 +112,7 @@ result = emailResult;
   </Row>
 </Form>
 
+{filteredData.length > 0 ? 
 
 <Table striped bordered hover size="sm">
   <thead>
@@ -196,6 +151,12 @@ result = emailResult;
 
   </tbody>
 </Table>  
+:
+<div>
+<p>Please register this new customer.</p>
+<ClientForm />
+</div>
+}
 </div>
     )
 }
