@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Table from 'react-bootstrap/Table'
 import api from  '../../utils/api'
 import { Form, Col, Row, Button } from 'react-bootstrap';
 import ClientForm from '../ClientForm.js';
+import { CurrCustContext } from '../../utils/currentCustomerContext';
+import UpdateModal from '../UpdateModal';
 
 function CustomerTable() {
     const [allData,setAllData] = useState([]);
     const [filteredData,setFilteredData] = useState(allData);
+    const [ ID, setID ] = useState("")
+    console.log(ID)
+
+    const context = useContext(CurrCustContext)
 
     const handleSearch = (event) =>{
         let value = event.target.value;
@@ -59,6 +65,7 @@ result = emailResult;
         console.log(result)
         // }
         setFilteredData(result);
+        context.setCurrCust(result)
       }
     
     useEffect(() => {
@@ -86,6 +93,16 @@ result = emailResult;
 
       function onDelete(e) {
         api.deleteProduct()
+    }
+
+    function handleRowClick(e) {
+      e.preventDefault();
+      let customer_id =[];
+    customer_id = allData.filter((data) => {
+  return data._id.search(e.target.key) !== -1;
+});
+console.log(this._id);
+
     }
 
 
@@ -133,7 +150,14 @@ result = emailResult;
 
                 // (data.group === "Upholstery") ?
 
-            <tr key={data._id}>
+            <tr 
+            
+            key={data._id}  
+            // onLoad={setID(data._id)} 
+            onClick={(e) => setID(data._id)}
+            // onClick={handleRowClick}
+            >
+          {/* {(e) => alert(data._id)} >  */}
             <td>{data.customerID}</td>
             <td>{data.lastName}, {data.firstName}</td>
             <td>{data.cellPhone}</td>
@@ -142,7 +166,9 @@ result = emailResult;
             <td>{data.address.line1}, {data.address.line2}, {data.address.city}, {data.address.state}, {data.address.zip}</td>
             <td>{data.jobs}</td>
 
-            <td><Button size="sm" variant="info">Update</Button>
+            <td>
+              {/* <Button size="sm" variant="info">Update</Button> */}
+              <UpdateModal  />
             <Button onClick={onDelete} style={{marginLeft: "10px"}} size="sm" variant="danger">Delete</Button></td>
           </tr>
     //   : <tr></tr>
