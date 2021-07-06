@@ -30,6 +30,19 @@ email: {
     type: String,
   //   required: [true, "Please provide at least one show"]
 },
+referral: {
+  type: String,
+//   required: [true, "Please provide at least one show"]
+},
+county: {
+  type: String,
+//   required: [true, "Please provide at least one show"]
+},
+confirmed: {
+  type: Boolean,
+//   required: [true, "Please provide at least one show"]
+},
+
 address: {
     
         line1: {
@@ -57,7 +70,7 @@ address: {
   jobs: [
     {
      type: Schema.Types.ObjectId,
-        ref: "Jobs",
+     ref: "Job",
     }
     ]      
   

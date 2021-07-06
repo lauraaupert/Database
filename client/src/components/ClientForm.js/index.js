@@ -13,28 +13,19 @@ function ClientForm() {
     const [ city, setCity ] = useState('')
     const [ state, setState ] = useState('')
     const [ zip, setZip ] = useState('')
-    const [ products, setProducts ] = useState([])
-    // const [ customerID, setCustomerID ] = useState('')
+    const [ county, setCounty ] = useState("")
+    const [ referral, setReferral ] = useState("")
+    const [ confirmed, setConfirmed ] = useState("")    // const [ customerID, setCustomerID ] = useState('')
     const customerID = 7832
-
-
+  console.log(county)
+  console.log(referral)
+  console.log(confirmed)
     function onSubmit(e) {
         e.preventDefault();
-        api.saveCustomer(customerID, firstName, lastName, cellPhone, homePhone, email, line1, line2, city, state, zip)
+        api.saveCustomer(customerID, firstName, lastName, cellPhone, homePhone, email, referral, county, confirmed, line1, line2, city, state, zip)
       }
 
-    useEffect(() => {
-      console.log()
-      api.getProducts()
-      .then(res => {
-        console.log(res.data)
-        setProducts(res.data);
-      })
-      .catch(error => {
-        console.log('Error getting fake data: ' + error);
-        })
-    
-    }, []);   
+  
 // setCustomerID(7324)
     return(
         <Form>
@@ -152,26 +143,27 @@ function ClientForm() {
 
   <Form.Row>
       <Col>
+
   <Form.Group controlId="exampleForm.ControlSelect1">
     <Form.Label>Referral</Form.Label>
-    <Form.Control as="select">
-      <option>Google</option>
-      <option>Friend</option>
-      <option>A little bird</option>
-      <option>Your mom</option>
-      <option>Add New</option>
+    <Form.Control as="select" onChange={(e) => {setReferral(e.target.value)}}>
+      <option value="Google">Google</option>
+      <option value="Friend">Friend</option>
+      <option value="A little bird">A little bird</option>
+      <option value="Google">Your mom</option>
+      <option value="Google">Add New</option>
     </Form.Control>
   </Form.Group>
   </Col>
   <Col>
   <Form.Group controlId="exampleForm.ControlSelect1">
     <Form.Label>County</Form.Label>
-    <Form.Control as="select">
-      <option>Bergen</option>
-      <option>Middlesex</option>
-      <option>New Jersey</option>
-      <option>Somewhere Else</option>
-      <option>Come Party</option>
+    <Form.Control as="select" onChange={(e) => {setCounty(e.target.value)}}>
+      <option value="Bergen">Bergen</option>
+      <option value="Middlesex">Middlesex</option>
+      <option value="California">New Jersey</option>
+      <option value="Somewhere else">Somewhere Else</option>
+      <option value="You heard me">Come Party</option>
     </Form.Control>
   </Form.Group>
   </Col>
@@ -180,23 +172,10 @@ function ClientForm() {
     type="switch"
     id="custom-switch"
     label="Confirmed Booking"
+    onChange={(e) => {setConfirmed(e.target.value)}}
   />
   </Col>
-  <Col>
-  <Form.Group controlId="exampleForm.ControlSelect1">
-    <Form.Label>Products</Form.Label>
-    <Form.Control as="select">
-    {products.map(item => {
-        return (
-
-            <option>{item.name}</option>
-              )
-    })}
-                  </Form.Control>
-
-  </Form.Group>
-  </Col>
-
+x
   </Form.Row>
 
 </Form.Group>
