@@ -15,7 +15,7 @@ function ClientForm() {
     const [ zip, setZip ] = useState('')
     const [ county, setCounty ] = useState("")
     const [ referral, setReferral ] = useState("")
-    const [ confirmed, setConfirmed ] = useState("")    // const [ customerID, setCustomerID ] = useState('')
+    const [ confirmed, setConfirmed ] = useState()    // const [ customerID, setCustomerID ] = useState('')
     const customerID = 7832
   console.log(county)
   console.log(referral)
