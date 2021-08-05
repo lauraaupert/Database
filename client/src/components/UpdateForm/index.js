@@ -4,10 +4,13 @@ import api from '../../utils/api';
 import { CurrCustContext } from '../../utils/currentCustomerContext';
 import axios from 'axios'
 
+
 function UpdateForm() {
 
     const context = useContext(CurrCustContext)
+    // const customer = context.currCust[0].curr_id
     const customer = context.currCust[0]
+
     const id = customer._id
 
     const [ customerID, setCustomerID ] = useState(customer.customerID)
@@ -25,16 +28,20 @@ function UpdateForm() {
 
 
     
-    console.log(id, customerID, firstName, cellPhone, homePhone, email, city, zip, lastName, county)
+    console.log(id, customerID, firstName, cellPhone, homePhone, email, city, lastName, county)
 
     function handleSubmit(e) {
         e.preventDefault();
         
         // axios.put("/api/customers", county)
         // .then(response => console.log(response.data));
-        api.updateCustomer(id, customerID, firstName, lastName, cellPhone, homePhone,
-            email, county, 
-            line1, line2, city, state, zip)
+        api.updateCustomer(
+            id, 
+            customerID, firstName, lastName, cellPhone, homePhone,
+            email, 
+            county, 
+            line1, line2, city, state, zip
+            )
         console.log(id, county)
     }
     return ( 

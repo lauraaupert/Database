@@ -16,6 +16,7 @@ import Customers from "./pages/Customers";
 import Navigation from "./components/Nav";
 import { Card } from 'react-bootstrap';
 import { CurrCustProvider } from "./utils/currentCustomerContext"
+import Jobs from "./pages/Jobs";
 // import { AllCustomersProvider } from "./utils/allCustomersContex"
 
 
@@ -39,6 +40,9 @@ function App() {
           </Route> */}
           <Route exact path={["/customers"]}>
             <Customers />
+          </Route>
+          <Route exact path={["/jobs"]}>
+            <Jobs />
           </Route>
 
           <Route exact path={["/admin"]}>

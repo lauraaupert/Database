@@ -68,17 +68,22 @@ function JobForm() {
   
     return (
         <div>
-                    <Accordion>
-            <Card>
-                <Card.Header>
-                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
+            {/* <Accordion defaultActiveKey="0" flush>
+  <Accordion.Item eventKey="0">
+                    {/* <Accordion> */}
+            {/* <Card>
+                <Card.Header> 
+                <Accordion.Header>
+                    {/* <Accordion.Toggle as={Button} variant="link" eventKey="0">
                     Add Job
-                    </Accordion.Toggle>
-                </Card.Header>
+                    </Accordion.Toggle> 
+                {/* </Card.Header> 
+                </Accordion.Header>
                 <Accordion.Collapse eventKey="0">
-            <Card.Body>
+            {/* <Card.Body> 
+            <Accordion.Body> */}
                 <Form>
-                    <Form.Row>
+                    <Row>
                     <Table striped bordered hover>
                         <Form.Group controlId="exampleForm.SelectCustom">
                         <thead>
@@ -100,16 +105,17 @@ function JobForm() {
 
                     </Form.Group>
 </Table>
-</Form.Row>
+</Row>
 </Form>
-</Card.Body>
+{/* </Card.Body> */}
+{/* </Accordion.Body>
     </Accordion.Collapse>
-  </Card>
+  </Card> */}
 
-</Accordion>
+{/* </Accordion> */}
 
 
-        <Button block variant="link" type="button" onClick={(e) => {return <JobRow />}}>Add Product</Button>
+        {/* <Button block variant="link" type="button" onClick={(e) => {return <JobRow />}}>Add Product</Button>
         </div>
 //         // <div>
 //             {/* <Accordion>
@@ -136,12 +142,11 @@ function JobForm() {
 
 //                             </tr>
 //                         </thead> */}
-// {/* <tbody style={{width: "100%"}}>
+{/* // {/* <tbody style={{width: "100%"}}>
 //    <tr style={{width: "100%"}}>
 
 //     <Form.Control as="select" custom                
 //     onChange={handleChange} 
-//                      */}
 // {/* >    <Form.Label>Choose Service</Form.Label>
 
 //         <option key="default">Choose a Product</option>
@@ -164,15 +169,15 @@ function JobForm() {
 // <td><Button variant="warning" type="submit" >Estimate Job</Button>
 // </td> */}
 
-//     {/* </tr>
+{/*//      </tr>
 //     <tr size="lg">
 //         <Button block variant="link" type="submit" >Add Product</Button>
 //     </tr>
 //     </tbody>
 
 //   </Form.Group>
-// </Table> */}
-//   {/* </Col> */}
+// </Table> 
+//   {/* </Col> 
 //   {/* <Col sm={2}>
 
 // <Form.Group controlId="exampleForm.SelectCustom">
@@ -189,7 +194,7 @@ function JobForm() {
 
 //      <p>${total.toFixed(2)}</p> 
 //      {/* <p></p>} */}
-// {/* </Col>
+{/*//  </Col>
 // <Col>
 // <p>With Tax</p>
 // <p>${tax}</p>
@@ -198,14 +203,14 @@ function JobForm() {
 // <p>Date</p>
 // <input type="date" min={today}onChange={(e) => setDate(e.target.value)}></input>
 // </Col> */}
-// {/* <Col>
+{/* // {/* <Col>
 // <Button variant="success" type="submit" onClick={handleSubmit}>Confirm</Button>
-// </Col>  */}
+// </Col>  
 
 
 
 
-//   {/* </Form.Row>
+//   </Form.Row>
 // </Form>
 //           </Card.Body>
 //     </Accordion.Collapse>
@@ -221,7 +226,8 @@ function JobForm() {
 //     </Accordion.Collapse>
 //   </Card>
 // </Accordion>
-// </div> */}
+// </div> */} 
+</div>
 
     )
 }

@@ -35,14 +35,15 @@ saveCustomer: function (customerID, firstName, lastName,
     }
     )
 },
-saveJob: function (jobID, customerID, date, jobType, quantity, total) {
-  console.log(jobID, customerID, date, jobType, quantity, total)
+saveJob: function (curr_id, jobID, customerID, date, product, quantity, total) {
+  console.log(curr_id, jobID, customerID, date, product, quantity, total)
   return axios.post('/api/jobs', {
+      curr_id: curr_id,
       jobID: jobID,
       customerID: customerID, 
       date: date, 
       serviceList: {
-        type: jobType, 
+        type: product, 
         quantity: quantity,
         total: total
       }
@@ -53,10 +54,15 @@ saveJob: function (jobID, customerID, date, jobType, quantity, total) {
 
 //   })
 // },
+getJobs: function () {
+  return axios.get('/api/jobs');
+},
 
 
   getCustomers: function () {
-    return axios.get('/api/customers');
+    return axios.get('/api/customers')
+    // .then(.populate("jobs").console.log(res);)
+    
   },
   getProducts: function () {
     return axios.get('/api/products');
@@ -72,17 +78,30 @@ saveJob: function (jobID, customerID, date, jobType, quantity, total) {
   //    { _id: id },
   //    {$push: {county: county} }
   //   )},
-    updateCustomer: function (id, customerID, firstName, lastName, cellPhone, homePhone,
-       email, county, 
-       line1, line2, city, state, zip) {
+
+  //DONT TOUCH THIS
+  linkJob: function(curr_id, job_id) {
+    return axios.put("api/customers", {
+      _id: curr_id,
+      $push: {jobs: job_id},
+    }
+    )
+  },
+  
+    updateCustomer: function (id, 
+      customerID, firstName, lastName, cellPhone, homePhone,
+       email, 
+       county, 
+       line1, line2, city, state, zip
+       ) {
       return axios.put("/api/customers", 
        { _id: id, 
+        $set: {
         customerID: customerID, 
         firstName: firstName, 
         lastName: lastName, 
         cellPhone: cellPhone,
         homePhone: homePhone,
-
         email: email,
         county: county,
         address: {
@@ -93,6 +112,7 @@ saveJob: function (jobID, customerID, date, jobType, quantity, total) {
             zip: zip
           }
         } 
+      }
       )},
   getCustomer: function (search) {
     return axios.get('/api/customers', search);

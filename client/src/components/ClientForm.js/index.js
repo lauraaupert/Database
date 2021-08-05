@@ -30,7 +30,7 @@ function ClientForm() {
     return(
         <Form>
 <Form.Group>
-  <Form.Row>
+  <Row>
     <Form.Label column="md" md={2}>
       First Name
     </Form.Label>
@@ -39,11 +39,11 @@ function ClientForm() {
       onChange={(e) => setFirstName(e.target.value)} value={firstName}
        />
     </Col>
-  </Form.Row>
+  </Row>
 
   <hr />
 
-  <Form.Row>
+  <Row>
     <Form.Label column="md" md={2}>
       Last Name
     </Form.Label>
@@ -52,11 +52,11 @@ function ClientForm() {
       onChange={(e) => setLastName(e.target.value)} value={lastName}
        />
     </Col>
-  </Form.Row>
+  </Row>
   
   <hr />
 
-  <Form.Row>
+  <Row>
     <Form.Label column="md" md={2}>
       Cell Phone
     </Form.Label>
@@ -65,11 +65,11 @@ function ClientForm() {
       onChange={(e) => setCellPhone(e.target.value)} value={cellPhone}
       />
     </Col>
-  </Form.Row>
+  </Row>
 
   <hr />
 
-  <Form.Row>
+  <Row>
     <Form.Label column="md" md={2}>
       Home Phone
     </Form.Label>
@@ -78,11 +78,11 @@ function ClientForm() {
       onChange={(e) => setHomePhone(e.target.value)} value={homePhone}
        />
     </Col>
-  </Form.Row>
+  </Row>
 
   <hr />
 
-  <Form.Row>
+  <Row>
     <Form.Label column="md" md={2}>
       Email
     </Form.Label>
@@ -90,11 +90,11 @@ function ClientForm() {
       <Form.Control size="md" type="email" placeholder="Email"
       onChange={(e) => setEmail(e.target.value)} value={email} />
     </Col>
-  </Form.Row>
+  </Row>
 
   <hr />
 
-  <Form.Row>
+  <Row>
     <Form.Label column="md" md={2}>
       Address Line 1
     </Form.Label>
@@ -103,11 +103,11 @@ function ClientForm() {
       onChange={(e) => setLine1(e.target.value)} value={line1}
       />
     </Col>
-  </Form.Row>
+  </Row>
 
   <hr />
 
-  <Form.Row>
+  <Row>
     <Form.Label column="md" md={2}>
       Address Line 2
     </Form.Label>
@@ -116,11 +116,11 @@ function ClientForm() {
       onChange={(e) => setLine2(e.target.value)} value={line2}
       />
     </Col>
-  </Form.Row>
+  </Row>
 
   <hr />
 
-  <Form.Row>
+  <Row>
     <Form.Label column="md" md={2}>
       City, State, Zip
     </Form.Label>
@@ -137,34 +137,34 @@ function ClientForm() {
       onChange={(e) => setZip(e.target.value)} value={zip} />
     </Col>
 
-  </Form.Row>
+  </Row>
 
   <hr />
 
-  <Form.Row>
+  <Row>
       <Col>
 
   <Form.Group controlId="exampleForm.ControlSelect1">
     <Form.Label>Referral</Form.Label>
-    <Form.Control as="select" onChange={(e) => {setReferral(e.target.value)}}>
+    <Form.Select onChange={(e) => {setReferral(e.target.value)}}>
       <option value="Google">Google</option>
       <option value="Friend">Friend</option>
       <option value="A little bird">A little bird</option>
       <option value="Google">Your mom</option>
       <option value="Google">Add New</option>
-    </Form.Control>
+    </Form.Select>
   </Form.Group>
   </Col>
   <Col>
   <Form.Group controlId="exampleForm.ControlSelect1">
     <Form.Label>County</Form.Label>
-    <Form.Control as="select" onChange={(e) => {setCounty(e.target.value)}}>
+    <Form.Select onChange={(e) => {setCounty(e.target.value)}}>
       <option value="Bergen">Bergen</option>
       <option value="Middlesex">Middlesex</option>
       <option value="California">New Jersey</option>
       <option value="Somewhere else">Somewhere Else</option>
       <option value="You heard me">Come Party</option>
-    </Form.Control>
+    </Form.Select>
   </Form.Group>
   </Col>
   <Col>
@@ -176,7 +176,7 @@ function ClientForm() {
   />
   </Col>
 x
-  </Form.Row>
+  </Row>
 
 </Form.Group>
 

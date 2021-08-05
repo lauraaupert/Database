@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const JobSchema = new Schema({ 
+    curr_id: {
+        type: Schema.Types.ObjectId,
+        ref: "Customer"
+        // type: String
+    },
     jobID: {
         type: Number
     },
@@ -12,26 +17,19 @@ const JobSchema = new Schema({
         type: Date,
         default: Date.now,
     },
-    dayService: {
+    date: {
         type: Date,
     },
     serviceList: [
         {
         type: {
-            type: String,
+            type: Object,
             // required: "Exercise type required",
-        },
-        name: {
-             type: String,
-            //  required: "Exercise name required",
-        },
-        code: {
-            type: String
         },
         quantity: {
             type: Number
         },
-        price: {
+        total: {
             type: Number
         }
         }

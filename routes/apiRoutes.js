@@ -51,9 +51,17 @@ router.post("/api/customers", function(req, res) {
   //     )
   // })
 
+//DONT TOUCH THIS
   router.put("/api/customers", function(req, res) {
-    Customer.findOneAndUpdate(res.data, req.body)
-    .then(console.log(req.data))
+    // console.log(req.data)
+
+    Customer.findOneAndUpdate(
+      // { _id: }
+      req.data, req.body,
+      // {$push: {jobs: req.body}},
+      {new: true}
+      )
+    .then(data => res.json(data))
   })
 
   // app.put("/api/workouts/:id", (req, res) => {
@@ -76,23 +84,15 @@ router.post("/api/customers", function(req, res) {
 
 
   router.get("/api/customers", function(req, res) {
-    Customer.find({}).then(data => res.json(data))
-    
-      // res.json(
-      //   {
-      //     name: req.name
-      //   }
-      // )
+    Customer.find({}).populate("jobs").then(data => res.json(data))
+    console.log(res)
   });
-  router.get("/api/products", function(req, res) {
-    Product.find({}).then(data => res.json(data))
-    
-      // res.json(
-      //   {
-      //     name: req.name
-      //   }
-      // )
+  router.get("/api/jobs", function(req, res) {
+    Job.find({})
+    .populate("curr_id")
+    .then(data => res.json(data))
   });
+
 
   // router.post("/api/customers/:id"), function(req,res) {
   //   var custID = req.params.id;
@@ -110,7 +110,7 @@ router.post("/api/customers", function(req, res) {
   // //   .then(console.log(req.data))
   // }
 
-  router.post("/api/products"), function(req,res) {
+  router.put("/api/products"), function(req,res) {
     Product.findOneAndUpdate(res.data.name, req.body)
     .then(console.log(req.data))
   }

@@ -15,6 +15,8 @@ export const CurrCustProvider = ({ children }) => {
       value={{
         currCust,
         setCurrCust,
+        currJob,
+        setCurrJob
       }}
     >
       {children}

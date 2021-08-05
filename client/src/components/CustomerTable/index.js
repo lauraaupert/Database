@@ -1,18 +1,27 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Table from 'react-bootstrap/Table'
 import api from  '../../utils/api'
-import { Form, Col, Row, Button } from 'react-bootstrap';
+import { Form, Col, Row, Button, Accordion, Card } from 'react-bootstrap';
 import ClientForm from '../ClientForm.js';
 import { CurrCustContext } from '../../utils/currentCustomerContext';
 import UpdateModal from '../UpdateModal';
+import InfoCanvas from '../CustCanvas';
+
 
 function CustomerTable() {
     const [allData,setAllData] = useState([]);
     const [filteredData,setFilteredData] = useState(allData);
     const [ ID, setID ] = useState("")
+        const [show, setShow] = useState(false);
+  
+    const handleClose = () => setShow(false);
+    const handleShow = () => {
+        setShow(true);
+    }
     console.log(ID)
 
     const context = useContext(CurrCustContext)
+
 
     const handleSearch = (event) =>{
         let value = event.target.value;
@@ -90,20 +99,24 @@ result = emailResult;
     e.preventDefault();
 }
 
+useEffect(() => {
+      let customer_id =[];
+    customer_id = allData.filter((data) => {
+  return data._id.search(ID) !== -1;
+});      
+context.setCurrCust(customer_id)
+ }, [ID])
+
+//  console.log(this._id);
 
       function onDelete(e) {
         api.deleteProduct()
     }
 
-    function handleRowClick(e) {
-      e.preventDefault();
-      let customer_id =[];
-    customer_id = allData.filter((data) => {
-  return data._id.search(e.target.key) !== -1;
-});
-console.log(this._id);
+   
 
-    }
+
+
 
 
     return ( 
@@ -147,14 +160,13 @@ console.log(this._id);
   <tbody>
       {filteredData.map((data)=> {
                     return (
-
-                // (data.group === "Upholstery") ?
-
             <tr 
             
             key={data._id}  
             // onLoad={setID(data._id)} 
+            value={data._id}
             onClick={(e) => setID(data._id)}
+            style={{cursor:"pointer"}}
             // onClick={handleRowClick}
             >
           {/* {(e) => alert(data._id)} >  */}
@@ -164,17 +176,28 @@ console.log(this._id);
             <td>{data.homePhone}</td>
             <td>{data.email}</td>
             <td>{data.address.line1}, {data.address.line2}, {data.address.city}, {data.address.state}, {data.address.zip}</td>
-            <td>{data.jobs}</td>
+           <td><InfoCanvas />
+</td>
+<td><UpdateModal  /></td>
+            {/* <td>{data.jobs[0].jobID}</td> */}
+            {/* <td> 
+               
+            <Button onClick={onDelete} style={{marginLeft: "10px"}} size="sm" variant="danger">Delete</Button>
+            </td> */}
+            {/* {context.currCust.length == 1 ?
+  <td >               <UpdateModal/>
+            <Button onClick={onDelete} style={{marginLeft: "10px"}} size="sm" variant="danger">Delete</Button>
+</td> : <td></td>
+} */}
 
-            <td>
-              {/* <Button size="sm" variant="info">Update</Button> */}
-              <UpdateModal  />
-            <Button onClick={onDelete} style={{marginLeft: "10px"}} size="sm" variant="danger">Delete</Button></td>
           </tr>
-    //   : <tr></tr>
+          // </tr>
+    //       {/* </Accordion.Header>
+    //       </Accordion.Item>
+    //       </Accordion> */}
+    // //   : <tr></tr>
           ) 
       })}
-
   </tbody>
 </Table>  
 :

@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Form, Col, Row, Button, Accordion, Card, Table } from 'react-bootstrap';
 import api from '../../utils/api'
+import { CurrCustContext } from '../../utils/currentCustomerContext';
 
 
 function JobRow() {
@@ -12,7 +13,12 @@ function JobRow() {
     const [ price, setPrice ] = useState(Number)
     const [ code, setCode ] = useState("")
     const [ product, setProduct ] = useState({})
+    const [ _id, set_id ] = useState()
 
+    const context = useContext(CurrCustContext)
+
+
+    console.log(context)
     let total = quantity*price
     let tax = (total*1.06625).toFixed(2)
 
@@ -35,8 +41,15 @@ function JobRow() {
 
     function handleSubmit(e) {
         e.preventDefault()
-        api.saveJob(jobID, customerID, date, product, quantity, tax)
-    }
+        const curr_id = context.currCust[0]._id
+        api.saveJob(curr_id, jobID, customerID, date, product, quantity, tax)
+        // .then(res => {       
+        //     console.log(res)
+        //     api.linkJob(res.data.curr_id, res.data._id)
+        //     .then(res => {console.log(res)})
+        // }
+            
+        }
 
     useEffect(() => {
         api.getProducts()
@@ -58,34 +71,15 @@ function JobRow() {
         setPrice(product.price)
         setCode(product.code)
       }, [product])
-    
+      
+    //   useEffect(() => {
+    //     set_id(context.currCust[0]._id)
+    // // const _id = context.currCust[0]._id
+
+    // }, [context])
+
 
     return(
-        <div>
-        {/* <Accordion>
-            <Card>
-                <Card.Header>
-                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                    Add Job
-                    </Accordion.Toggle>
-                </Card.Header>
-                <Accordion.Collapse eventKey="0">
-            <Card.Body>
-                <Form>
-                    <Form.Row>
-                    <Table striped bordered hover>
-                        <Form.Group controlId="exampleForm.SelectCustom">
-                        <thead>
-                        <tr>
-                        <th>Choose Service</th>
-                        <th>Quantity</th>
-                        <th>Unit Price</th>
-                        <th>Total</th>
-                        <th>Total with Tax</th>
-                        <th>Date</th>
-
-                        </tr>
-                    </thead> */}
                     <tbody >
    <tr >
 
@@ -116,16 +110,6 @@ function JobRow() {
  </tr>
    </tbody>
 
-  {/* </Form.Group>
-</Table>
-</Form.Row>
-</Form>
-</Card.Body>
-    </Accordion.Collapse>
-  </Card>
-
-</Accordion> */}
-</div>
 
 
     )
