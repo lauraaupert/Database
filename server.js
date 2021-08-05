@@ -2,8 +2,11 @@ const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
-const mongoose = require("mongoose")
-const routes = require("./routes/apiRoutes")
+// const mongoose = require("mongoose")
+// const routes = require("./routes/apiRoutes")
+const routes = require("./routes/customerRoutes.js")
+const routesImg = require("./routes/imageRoutes")
+
 
 require('dotenv').config();
 
@@ -16,19 +19,20 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-mongoose.connect(
-  process.env.MONGODB_URI, 
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  },
-  () => console.log("DB connected!")
-);
+// mongoose.connect(
+//   process.env.MONGODB_URI, 
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false,
+//   },
+//   () => console.log("DB connected!")
+// );
 
 // Define API routes here
 app.use(routes);
+//app.use(routesImg)
 
 // Send every other request to the React app
 // Define any API routes before this runs
